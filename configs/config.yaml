@@ -58,3 +58,16 @@ wandb:
   # prefix: ""
   # job_type: "train"
   # tags: []
+
+slurm:
+  constraint: null
+  nodelist: null
+  run_name: s4
+  n_gpus: ${trainer.gpus}
+  time: ???
+
+# for remote debug
+remote_debug:
+  activate: false
+  port: null
+  ip: null

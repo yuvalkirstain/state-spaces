@@ -499,6 +499,13 @@ def benchmark_step(config):
         break
 
 
+def remote_debug(cfg):
+    if cfg.remote_debug.activate:
+        import pydevd_pycharm
+
+        pydevd_pycharm.settrace(cfg.remote_debug.ip, port=cfg.remote_debug.port, stdoutToServer=True, stderrToServer=True)
+
+
 @hydra.main(config_path="configs", config_name="config.yaml")
 def main(config: OmegaConf):
 
@@ -510,7 +517,7 @@ def main(config: OmegaConf):
 
     # Pretty print config using Rich library
     utils.train.print_config(config, resolve=True)
-
+    remote_debug(config)
     if config.train.benchmark_step:
         benchmark_step(config)
         exit()
